@@ -1,0 +1,20 @@
+# Backend
+Backend/siteledger/target/
+Backend/siteledger/src/main/resources/application-dev.properties
+Backend/siteledger/.idea/
+Backend/siteledger/*.iml
+Backend/siteledger/*.iws
+Backend/siteledger/*.ipr
+
+# Frontend
+Frontend/site-ledger-hub-main/node_modules/
+Frontend/site-ledger-hub-main/dist/
+Frontend/site-ledger-hub-main/.env
+Frontend/site-ledger-hub-main/.env.production
+Frontend/site-ledger-hub-main/.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+*.zip
