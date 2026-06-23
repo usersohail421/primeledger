@@ -28,7 +28,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: Frontend/site-ledger-hub-main
-        run: npm ci
+        run: npm install --legacy-peer-deps
 
       - name: Run tests
         working-directory: Frontend/site-ledger-hub-main
