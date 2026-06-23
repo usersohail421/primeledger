@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: primeledger-backend
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    buildCommand: ./mvnw clean package -DskipTests
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
