@@ -40,6 +40,11 @@ public class RateLimitFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
 
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         if (!rateLimitEnabled) {
             filterChain.doFilter(request, response);
             return;
@@ -72,27 +77,22 @@ public class RateLimitFilter extends OncePerRequestFilter {
 
     private Bucket resolveBucket(String uri, String method, String ip) {
 
-        // Login — 5 attempts per minute per IP
         if ("POST".equals(method) && uri.equals("/api/auth/login")) {
             return rateLimitConfig.getLoginBucket(ip);
         }
 
-        // Register — 3 attempts per minute per IP
         if ("POST".equals(method) && uri.equals("/api/auth/register")) {
             return rateLimitConfig.getRegisterBucket(ip);
         }
 
-        // PDF download — 10 per minute per user
         if ("GET".equals(method) && uri.matches("/api/projects/\\d+/bills/\\d+/pdf")) {
             return rateLimitConfig.getPdfBucket(getUserKey(ip));
         }
 
-        // Excel export — 5 per minute per user
         if ("GET".equals(method) && uri.matches("/api/projects/\\d+/export/excel")) {
             return rateLimitConfig.getExcelBucket(getUserKey(ip));
         }
 
-        // All other API endpoints — 60 per minute per user
         if (uri.startsWith("/api/")
                 && !uri.equals("/api/auth/login")
                 && !uri.equals("/api/auth/register")
