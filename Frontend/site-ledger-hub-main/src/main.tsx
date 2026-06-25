@@ -4,13 +4,13 @@ import "./index.css";
 import { PostHogProvider } from "@posthog/react";
 
 const options = {
-    api_host: import.meta.env.VITE_POSTHOG_HOST,
+    api_host: "https://us.i.posthog.com",
     defaults: "2026-05-30",
 } as const;
 
 createRoot(document.getElementById("root")!).render(
     <PostHogProvider
-        apiKey={import.meta.env.VITE_POSTHOG_PROJECT_TOKEN}
+        apiKey="phc_qrj87ktgHeXhzJKCb9v9qoQryFdnAUrhvKwEgK7BS6Bq"
         options={options}
     >
         <App />
